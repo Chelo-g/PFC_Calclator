@@ -24,7 +24,7 @@ App.vue ─ viwes/About.vue
                 └ components/TargetCalorieCalc/PFCBlanceChart.vue
 ```
 ｢PFCBlanceChart.vue｣だけ分けたのは最初に作って修正がめんどくさくなったから。  
-親-子を超えたmethodsの呼び出しがめんどくさい事を理解していればこうはしなかった。。  
+親-子を超えたmethodsの呼び出しがめんどくさい事を理解していればこうはしなかった。  
 次回作では修正が容易に出来る形で作成するよう心がける。
 
 ----
