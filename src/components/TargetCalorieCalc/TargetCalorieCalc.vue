@@ -62,7 +62,7 @@ export default {
     },
     methods: {
         ketoAddClick:function(){
-            //ケトジェニックダイエット理想値
+            //ケトジェニック理想値
             //inputに各カロリー値を入力
             this.FatCal = Math.round(this.$store.getters.TargetCalorie * 0.7);
             this.CarbonateCal = Math.round(4 * 20);
@@ -76,7 +76,7 @@ export default {
             this.$emit("chartUpdata")
         },
         lowfatAddClick:function(){
-            //ケトジェニックダイエット理想値
+            //ローファット理想値
             //inputに各カロリー値を入力
             this.FatCal = Math.round(30 * 9);
             this.ProteinCal = Math.round(this.BodyWeight * 2 * 4);
@@ -117,7 +117,6 @@ export default {
 </script>
 
 <style scoped>
-/*  cssはプログラム完成してから考えること */
 .Box{
   padding-top   : 4px;
   padding-right : 4px;
@@ -132,8 +131,8 @@ export default {
   display: inline-block;
 }
 td{
-    text-align: center; /* center checkbox horizontally */
-    vertical-align: middle; /* center checkbox vertically */
+    text-align: center;
+    vertical-align: middle;
 }
 .calTable input{
   width: 50px;

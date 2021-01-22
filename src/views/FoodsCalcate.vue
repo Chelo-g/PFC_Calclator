@@ -17,23 +17,14 @@
           <NutrientsChart ref="ChartNutrients" />
           <VitaminsChart ref="ChartVitamins" />
       </div>
-        <div class="chartVNContainer chart">
-      </div>
       <div class="footerContainer">
         食品データソース：<a href="https://www.mext.go.jp/a_menu/syokuhinseibun/1365297.htm">日本食品標準成分表2015年版（七訂）</a>
-
-
-
       </div>
   </div>
 </template>
 
 <script>
-//sonouti
-//オリジナルのPFC追加
-//ビタミン剤当追加
 import TargetCalc from '@/components/TargetCalorieCalc/TargetCalorieCalc.vue'
-
 import FoodCalc from '@/components/FoodsCalc/FoodsCalc'
 import FoodSearch from '@/components/FoodShearch/FoodShearch'
 import PFCChartCal from '@/components/FoodsCalc/PFCChartCal.vue'
