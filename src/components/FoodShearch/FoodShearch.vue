@@ -87,7 +87,7 @@ export default {
     created:function () {
         this.list = require("./Foods.json")
         this.$store.dispatch("setFoodList",this.list)
-        console.log("read Food List")
+        //console.log("read Food List")
     },
     computed:{
         //リストから抽出
@@ -139,7 +139,7 @@ export default {
             return this.sort.key === key ? `sorted ${this.sort.isAsc ? 'asc' : 'desc' }` : '';
         },
         saveFoods(item){
-            console.log(item.id)
+            //console.log(item.id)
             this.$store.dispatch("doFoodUpdata",item)
             this.$emit("chartUpdata")
         },

@@ -7,16 +7,17 @@ export default new Vuex.Store({
   state: {
     //これを参照にグラフを描写する
     TargetCalorie:1200,
+    BodyWeight:0,
     ProteinCalorie:0,
     FatCalorie:0,
     CarbonateCalorie:0,
     //PFC計算用
     FoodList:[],
     SelectFoods:[],
-//    CalcFoodsList:[]
   },
   getters:{
     TargetCalorie: state => state.TargetCalorie,
+    BodyWeight: state => state.BodyWeight,
     ProteinCalorie: state => state.ProteinCalorie,
     FatCalorie: state => state.FatCalorie,
     CarbonateCalorie: state => state.CarbonateCalorie,
@@ -26,10 +27,6 @@ export default new Vuex.Store({
     //PFC計算用
     FoodList: state => state.FoodList,
     SelectFoods: state => state.SelectFoods,
-//    CalcFoodsList: state => state.CalcFoodsList,
-//    getSumProtein:(state,getters) =>{
-//      return Math.round((getters.SelectFoods.reduce((sum,i)=>sum + i.Protein,0)*10))/10;
-//    },
     getsumParam:(state,getters) => param =>{
       return Math.round((getters.SelectFoods.reduce((sum,i) => sum + i[param] * i["weight"]/100,0)*10))/10;
     },
@@ -37,6 +34,9 @@ export default new Vuex.Store({
   mutations: {
     setTargetCalorie(state,payload){
       state.TargetCalorie = payload.TargetCalorie
+    },
+    setBodyWeight(state,payload){
+      state.BodyWeight = payload.BodyWeight
     },
     setProteinCalorie(state,payload){
       state.ProteinCalorie = payload.ProteinCalorie
@@ -50,8 +50,9 @@ export default new Vuex.Store({
     //食べ物計算用
     setFoodList(state,FoodList){
       state.FoodList = FoodList
-      console.log("set Food List")
+     // console.log("set Food List")
     },
+    //食品リストからの追加
     setSelectFoods(state,payload){
     //重複するとバグるので、重複禁止にする方向に変更
 //    var item = payload
@@ -59,7 +60,6 @@ export default new Vuex.Store({
 //    Vue.set(item,'selectId',selectId)
 //    Vue.set(item,'weight',100)
 //    state.SelectFoods.push(item)
-
 //    weightプロパティの有無で追加を判断
     if (payload.weight === undefined){
       Vue.set(payload,'weight',100)
@@ -71,13 +71,30 @@ export default new Vuex.Store({
       Vue.delete(state.SelectFoods[index],'weight')
       state.SelectFoods.splice(index,1)
     },
+    //セルフ食品登録用
     addOriginfood(state,payload){
       state.SelectFoods.push(payload)
+    },
+    //ストレージから読み込み用
+    //カロリー
+    setCalfromStroage(state,payload){
+      state.TargetCalorie = payload.TargetCalorie
+      state.ProteinCalorie = payload.ProteinCalorie
+      state.FatCalorie = payload.FatCalorie
+      state.CarbonateCalorie =payload.CarbonateCalorie
+      state.BodyWeight = payload.BodyWeight
+    },
+    //食品
+    setSelectFoodfromStroage(state,payload){
+      state.SelectFoods = payload
     },
   },
   actions: {
     doTargetUpdata({commit},TargetCalorie){
       commit('setTargetCalorie',{TargetCalorie})
+    },
+    doWeightUpdata({commit},BodyWeight){
+      commit('setBodyWeight',{BodyWeight})
     },
     doProteinUpdata({commit},ProteinCalorie){
       commit('setProteinCalorie',{ProteinCalorie})
@@ -100,6 +117,13 @@ export default new Vuex.Store({
     },
     addOriginfood({commit},originfood){
       commit('addOriginfood',originfood)
+    },
+    //ストレージ読み込み
+    setCalfromStroage({commit},storageCal){
+      commit('setCalfromStroage',storageCal)
+    },
+    setSelectFoodfromStroage({commit},storageFood){
+      commit('setSelectFoodfromStroage',storageFood)
     },
   },
   modules: {

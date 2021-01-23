@@ -56,6 +56,20 @@
 </template>
 
 <script>
+// ストレージに保存
+// https://jp.vuejs.org/v2/examples/todomvc.html
+// 食品リスト
+var STORAGE_KEY_FOOD = 'pfc-calc-foodlist'
+var pfcCalcFoodStorage = {
+  fetch: function () {
+    var foods = JSON.parse(localStorage.getItem(STORAGE_KEY_FOOD) || '[]')
+    return foods
+  },
+  save: function (foods) {
+    localStorage.setItem(STORAGE_KEY_FOOD, JSON.stringify(foods))
+  }
+}
+
 export default {
     data:function() {
         return {
@@ -65,11 +79,23 @@ export default {
             },
         }
     },
+    created() {
+        //console.log("create")
+        this.$store.dispatch('setSelectFoodfromStroage',pfcCalcFoodStorage.fetch())
+    },
+    watch:{
+        watchSelectFoods:{
+            handler: function(watchSelectFoods){
+                pfcCalcFoodStorage.save(watchSelectFoods)
+            },
+            deep: true
+        }
+    },
     computed:{
         //ソート機能
         //https://qiita.com/HagaSpa/items/7f9440e7d5d73a2896a3
         sortList:function(){
-            let list = this.$store.getters.SelectFoods.slice()
+            let list = this.$store.getters.SelectFoods.slice();
 
             //昇順、降順
             if(this.sort.key){
@@ -79,8 +105,12 @@ export default {
                     return (a === b ? 0 : a > b ? 1 : -1) * (this.sort.isAsc ? 1 : -1);
                 });
             }
-            return list
+            return list;
         },
+        //Vuex値の監視用
+        watchSelectFoods(){
+            return this.$store.getters.SelectFoods;
+        }
     },
     methods: {
         sortBy: function(key) {
@@ -93,7 +123,7 @@ export default {
         //indexの取得
         //https://yoshikiito.net/blog/archives/1028/
         dellFood(index){
-            console.log(index)
+            //console.log(index)
             this.$store.dispatch("doFoodDel",index)
             this.$emit("chartUpdata")
         },
