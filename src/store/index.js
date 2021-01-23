@@ -61,7 +61,7 @@ export default new Vuex.Store({
 //    state.SelectFoods.push(item)
 
 //    weightプロパティの有無で追加を判断
-  if (payload.weight === undefined){
+    if (payload.weight === undefined){
       Vue.set(payload,'weight',100)
       state.SelectFoods.push(payload);
     }
@@ -70,6 +70,9 @@ export default new Vuex.Store({
       //Weightプロパティ消さないと再度追加不能になるので、プロパティを消す処理を挟む
       Vue.delete(state.SelectFoods[index],'weight')
       state.SelectFoods.splice(index,1)
+    },
+    addOriginfood(state,payload){
+      state.SelectFoods.push(payload)
     },
   },
   actions: {
@@ -94,6 +97,9 @@ export default new Vuex.Store({
     },
     setFoodList({commit},FoodList){
       commit('setFoodList',FoodList)
+    },
+    addOriginfood({commit},originfood){
+      commit('addOriginfood',originfood)
     },
   },
   modules: {

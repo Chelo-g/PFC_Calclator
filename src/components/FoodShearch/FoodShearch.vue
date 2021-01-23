@@ -12,15 +12,15 @@
                 </thead>
                     <tr>
                         <th>最大値</th>
-                        <th><input v-model.number="maxProtein" type="number" min="0"></th>
-                        <th><input v-model.number="maxFat" type="number" min="0"> </th>
-                        <th><input v-model.number="maxCarbonate" type="number" min="0"></th>
+                        <th><input v-model.number="maxProtein" type="number" min="0" max="100"></th>
+                        <th><input v-model.number="maxFat" type="number" min="0" max="100"> </th>
+                        <th><input v-model.number="maxCarbonate" type="number" min="0" max="100"></th>
                     </tr>
                     <tr>
                         <th>最小値</th>
-                        <th><input v-model.number="minProtein" type="number" min="0"></th>
-                        <th><input v-model.number="minFat" type="number" min="0"></th>
-                        <th><input v-model.number="minCarbonate" type="number" min="0"></th>
+                        <th><input v-model.number="minProtein" type="number" min="0" max="100"></th>
+                        <th><input v-model.number="minFat" type="number" min="0" max="100"></th>
+                        <th><input v-model.number="minCarbonate" type="number" min="0" max="100"></th>
                     </tr>
             </table>
         <div>
@@ -44,6 +44,13 @@
             </thead>
 
             <tbody>
+                <tr>
+                    <th><input ref="addName" type="text" class="textbox"></th>
+                    <th><input ref="addProtein" type="number" min="0" max="100" value="0"></th>
+                    <th><input ref="addFat" type="number" min="0" max="100" value="0"></th>
+                    <th><input ref="addCarbo" type="number" min="0" max="100" value="0"></th>
+                    <th><button @click="addFoods()">Add</button></th>
+                </tr>
                 <tr v-for="item in limited" v-bind:key="item.id">
                     <th class="itemName">{{ item.name }}</th>
                     <th>{{Number(item.Protein)}}</th>
@@ -135,6 +142,20 @@ export default {
             console.log(item.id)
             this.$store.dispatch("doFoodUpdata",item)
             this.$emit("chartUpdata")
+        },
+        addFoods(){
+            //console.log("do addFoods")
+            var addProtein = this.$refs.addProtein
+            var addFat = this.$refs.addFat
+            var addCarbo = this.$refs.addCarbo
+            var addName = this.$refs.addName
+            var item ={weight: 100,Protein: parseFloat(addProtein.value),Fat:parseFloat(addFat.value),Carbo:parseFloat(addCarbo.value),name: addName.value}
+            this.$store.dispatch("addOriginfood",item)
+            //初期化
+            addProtein.value = 0
+            addFat.value = 0
+            addCarbo.value = 0
+            addName.value = ""
         }
     }
 }
