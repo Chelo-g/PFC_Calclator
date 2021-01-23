@@ -77,12 +77,18 @@ export default new Vuex.Store({
     },
     //ストレージから読み込み用
     //カロリー
-    setCalfromStroage(state,payload){
+    setCalfromStroage(state,payload){ 
       state.TargetCalorie = payload.TargetCalorie
+      if (payload.TargetCalorie == undefined){
+        return state.TargetCalorie = 1200;
+      }
       state.ProteinCalorie = payload.ProteinCalorie
       state.FatCalorie = payload.FatCalorie
       state.CarbonateCalorie =payload.CarbonateCalorie
       state.BodyWeight = payload.BodyWeight
+      if (payload.BodyWeight == undefined){
+        return state.BodyWeight = 50;
+      }
     },
     //食品
     setSelectFoodfromStroage(state,payload){
