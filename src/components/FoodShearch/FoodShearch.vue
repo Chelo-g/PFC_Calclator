@@ -45,7 +45,7 @@
 
             <tbody>
                 <tr>
-                    <th><input ref="addName" type="text" class="textbox"></th>
+                    <th><input ref="addName" type="text" class="textbox"  placeholder="自分で登録"></th>
                     <th><input ref="addProtein" type="number" min="0" max="100" value="0"></th>
                     <th><input ref="addFat" type="number" min="0" max="100" value="0"></th>
                     <th><input ref="addCarbo" type="number" min="0" max="100" value="0"></th>
