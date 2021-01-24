@@ -14,6 +14,7 @@ export default new Vuex.Store({
     //PFC計算用
     FoodList:[],
     SelectFoods:[],
+    FoodListNumber:1,
   },
   getters:{
     TargetCalorie: state => state.TargetCalorie,
@@ -27,38 +28,59 @@ export default new Vuex.Store({
     //PFC計算用
     FoodList: state => state.FoodList,
     SelectFoods: state => state.SelectFoods,
+    FoodListNumber: state => state.FoodListNumber,
     getsumParam:(state,getters) => param =>{
-      return Math.round((getters.SelectFoods.reduce((sum,i) => sum + i[param] * i["weight"]/100,0)*10))/10;
+      return Math.round((getters.filterSelectFoods.reduce((sum,i) => sum + i[param] * i["weight"]/100,0)*10))/10;
     },
+    //ListでフィルターしたSelectFoods
+    filterSelectFoods: state =>{
+      var index = 0
+      var filterList=[];
+      for(index in state.SelectFoods){
+        if(state.SelectFoods[index]["lists"].list == state.FoodListNumber){
+          filterList.push(state.SelectFoods[index])
+        }
+      }
+      return filterList
+    }
   },
   mutations: {
     setTargetCalorie(state,payload){
-      state.TargetCalorie = payload.TargetCalorie
+      state.TargetCalorie = payload
     },
     setBodyWeight(state,payload){
-      state.BodyWeight = payload.BodyWeight
+      state.BodyWeight = payload
     },
     setProteinCalorie(state,payload){
-      state.ProteinCalorie = payload.ProteinCalorie
+      state.ProteinCalorie = payload
     },
     setFatCalorie(state,payload){
-      state.FatCalorie = payload.FatCalorie
+      state.FatCalorie = payload
     },
     setCarbonateCalorie(state,payload){
-      state.CarbonateCalorie = payload.CarbonateCalorie
+      state.CarbonateCalorie = payload
     },
     //食べ物計算用
     setFoodList(state,FoodList){
       state.FoodList = FoodList
      // console.log("set Food List")
     },
+    changeSelectList(state,FoodListNumber){
+      state.FoodListNumber = FoodListNumber
+    },
     //食品リストからの追加
     setSelectFoods(state,payload){
     //重複して登録させると重量入力時同じものも変化するので、名前で判定する
     var isFoodExit = false
     var index = 0
+    var filterList= [];
     for(index in state.SelectFoods){
-      if(state.SelectFoods[index].name == payload.name){
+      if(state.SelectFoods[index]["lists"].list == state.FoodListNumber){
+        filterList.push(state.SelectFoods[index])
+      }
+    }
+    for(index in filterList){
+      if(filterList[index].name == payload.name){
         isFoodExit = true;
         break;
       }
@@ -67,12 +89,23 @@ export default new Vuex.Store({
         //重複時はいまのところ何もしない
       }else{
         //重複しない時は重量のプロパティを付与してpushする
-        Vue.set(payload,'weight',100)
-        state.SelectFoods.push(payload);
+        var item = payload
+        //下の手法だと既存の食品のListsに上書きされる
+        // Vue.set(item,'weight',100)
+        // Vue.set(item,'lists',{list: state.FoodListNumber})
+        item = Object.assign({}, item, { weight: 100, lists: {list:state.FoodListNumber} })
+        state.SelectFoods.push(item);
       }
     },
-    deleteSelectFood(state,index) {
-      state.SelectFoods.splice(index,1)
+    deleteSelectFood(state,name) {
+      //品名、現在のリスト番号が合致した場合は削除しループをブレイク
+      var index = 0;
+      for(index in state.SelectFoods){
+        if(state.SelectFoods[index].name == name && state.SelectFoods[index].lists.list==state.FoodListNumber)
+          state.SelectFoods.splice(index,1)
+          break;
+      }
+      // state.SelectFoods.splice(index,1)
     },
     //セルフ食品登録用
     addOriginfood(state,payload){
@@ -100,21 +133,24 @@ export default new Vuex.Store({
   },
   actions: {
     doTargetUpdata({commit},TargetCalorie){
-      commit('setTargetCalorie',{TargetCalorie})
+      commit('setTargetCalorie',TargetCalorie)
     },
     doWeightUpdata({commit},BodyWeight){
-      commit('setBodyWeight',{BodyWeight})
+      commit('setBodyWeight',BodyWeight)
     },
     doProteinUpdata({commit},ProteinCalorie){
-      commit('setProteinCalorie',{ProteinCalorie})
+      commit('setProteinCalorie',ProteinCalorie)
     },
     doFatUpdata({commit},FatCalorie){
-      commit('setFatCalorie',{FatCalorie})
+      commit('setFatCalorie',FatCalorie)
     },
     doCarbonateUpdata({commit},CarbonateCalorie){
-      commit('setCarbonateCalorie',{CarbonateCalorie})
+      commit('setCarbonateCalorie',CarbonateCalorie)
     },
     //食べ物計算用
+    changeSelectList({commit},listNumber){
+      commit('changeSelectList',listNumber)
+    },
     doFoodUpdata({commit},SelectFoods){
       commit('setSelectFoods',SelectFoods)
     },

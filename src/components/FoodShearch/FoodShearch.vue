@@ -140,6 +140,8 @@ export default {
         },
         saveFoods(item){
             //console.log(item.id)
+            // var payload = this.$store.getters.FoodList[item]
+            console.log(item)
             this.$store.dispatch("doFoodUpdata",item)
             this.$emit("chartUpdata")
         },
@@ -149,7 +151,7 @@ export default {
             var addFat = this.$refs.addFat
             var addCarbo = this.$refs.addCarbo
             var addName = this.$refs.addName
-            var item ={weight: 100,Protein: parseFloat(addProtein.value),Fat:parseFloat(addFat.value),Carbo:parseFloat(addCarbo.value),name: addName.value}
+            var item ={weight: 100,Protein: parseFloat(addProtein.value),Fat:parseFloat(addFat.value),Carbo:parseFloat(addCarbo.value),name: addName.value,lists: {list: this.$store.getters.FoodListNumber}}
             this.$store.dispatch("addOriginfood",item)
             //初期化
             addProtein.value = 0

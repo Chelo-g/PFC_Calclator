@@ -34,10 +34,11 @@
         </div>
         <div>
             リストNo.
-            <input type="radio" name="list" value="1" checked="checked">1
-            <input type="radio" name="list" value="2">2
-            <input type="radio" name="list" value="3">3
-            <input type="radio" name="list" value="4">4
+            <input type="radio" name="list" checked="checked" @click="selectListNumber(1)">1 |
+            <input type="radio" name="list" @click="selectListNumber(2)">2 |
+            <input type="radio" name="list" @click="selectListNumber(3)">3 |
+            <input type="radio" name="list" @click="selectListNumber(4)">4 |
+            <input type="radio" name="list" @click="selectListNumber(5)">5
         </div>
 
         <div>
@@ -59,7 +60,7 @@
                     <th>{{pointRound(item.Fat,item.weight)}}</th>
                     <th>{{pointRound(item.Carbo,item.weight)}}</th>
                     <th><input type="number" v-model.number="item.weight" @change="doChartUpdate" step="10"></th>
-                    <th><button @click="dellFood(index)">del</button></th>
+                    <th><button @click="dellFood(item.name)">del</button></th>
                 </tr>
             </tbody>
         </table>
@@ -107,7 +108,7 @@ export default {
         //ソート機能
         //https://qiita.com/HagaSpa/items/7f9440e7d5d73a2896a3
         sortList:function(){
-            let list = this.$store.getters.SelectFoods;
+            let list = this.$store.getters.filterSelectFoods;
 
             //昇順、降順
             if(this.sort.key){
@@ -138,9 +139,9 @@ export default {
         },
         //indexの取得
         //https://yoshikiito.net/blog/archives/1028/
-        dellFood(index){
+        dellFood(name){
             //console.log(index)
-            this.$store.dispatch("doFoodDel",index)
+            this.$store.dispatch("doFoodDel",name)
             this.$emit("chartUpdata")
         },
         doChartUpdate(){
@@ -153,6 +154,10 @@ export default {
             if(value<0){
                 return "redText"
             }
+        },
+        selectListNumber(listNumber){
+            this.$store.dispatch("changeSelectList",listNumber)
+            this.$emit("chartUpdata")
         }
     },
 }
