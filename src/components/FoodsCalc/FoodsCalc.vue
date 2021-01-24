@@ -7,27 +7,39 @@
                     <th>蛋白質(kcal)</th>
                     <th>脂質(kcal)</th>
                     <th>炭水化物(kcal)</th>
+                    <th>合計(kcal)</th>
                 </tr>
                 <tr>
                     <th>目標値</th>
                     <th>{{(this.$store.getters.ProteinCalorie).toFixed(1)}}</th>
                     <th>{{(this.$store.getters.FatCalorie).toFixed(1)}}</th>
                     <th>{{(this.$store.getters.CarbonateCalorie).toFixed(1)}}</th>
+                    <th>{{(this.$store.getters.TargetCalorie).toFixed(1)}}</th>
                 </tr>
                 <tr>
                     <th>合計値</th>
                     <th>{{this.$store.getters.getsumParam("Protein").toFixed(1)}}</th>
                     <th>{{this.$store.getters.getsumParam("Fat").toFixed(1)}}</th>
                     <th>{{this.$store.getters.getsumParam("Carbo").toFixed(1)}}</th>
+                    <th>{{totalCal}}</th>
                 </tr>
                 <tr>
                     <th>目標-合計</th>
                     <th :class="judgeRedText(this.$store.getters.ProteinCalorie - this.$store.getters.getsumParam('Protein'))">{{(this.$store.getters.ProteinCalorie - this.$store.getters.getsumParam("Protein")).toFixed(1)}}</th>
                     <th :class="judgeRedText(this.$store.getters.FatCalorie - this.$store.getters.getsumParam('Fat'))">{{(this.$store.getters.FatCalorie - this.$store.getters.getsumParam("Fat")).toFixed(1)}}</th>
                     <th :class="judgeRedText(this.$store.getters.CarbonateCalorie - this.$store.getters.getsumParam('Carbo'))">{{(this.$store.getters.CarbonateCalorie - this.$store.getters.getsumParam("Carbo")).toFixed(1)}}</th>
+                    <th :class="judgeRedText(this.$store.getters.TargetCalorie -totalCal)">{{(this.$store.getters.TargetCalorie - totalCal)}}</th>
                 </tr>
             </table>
         </div>
+        <div>
+            リストNo.
+            <input type="radio" name="list" value="1" checked="checked">1
+            <input type="radio" name="list" value="2">2
+            <input type="radio" name="list" value="3">3
+            <input type="radio" name="list" value="4">4
+        </div>
+
         <div>
         <table class="listTable">
             <thead>
@@ -86,7 +98,7 @@ export default {
     watch:{
         watchSelectFoods:{
             handler: function(watchSelectFoods){
-                pfcCalcFoodStorage.save(watchSelectFoods)
+                pfcCalcFoodStorage.save(watchSelectFoods);
             },
             deep: true
         }
@@ -95,7 +107,7 @@ export default {
         //ソート機能
         //https://qiita.com/HagaSpa/items/7f9440e7d5d73a2896a3
         sortList:function(){
-            let list = this.$store.getters.SelectFoods.slice();
+            let list = this.$store.getters.SelectFoods;
 
             //昇順、降順
             if(this.sort.key){
@@ -110,7 +122,11 @@ export default {
         //Vuex値の監視用
         watchSelectFoods(){
             return this.$store.getters.SelectFoods;
-        }
+        },
+        totalCal(){
+            var item = this.$store.getters.getsumParam("Protein") + this.$store.getters.getsumParam("Fat") + this.$store.getters.getsumParam("Carbo")
+            return item.toFixed(1)
+        },
     },
     methods: {
         sortBy: function(key) {

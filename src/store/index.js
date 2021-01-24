@@ -54,21 +54,24 @@ export default new Vuex.Store({
     },
     //食品リストからの追加
     setSelectFoods(state,payload){
-    //重複するとバグるので、重複禁止にする方向に変更
-//    var item = payload
-//    var selectId = state.SelectFoods.reduce((a,b)=>{return a > b.selectId ? a : b.selectId +1},0)
-//    Vue.set(item,'selectId',selectId)
-//    Vue.set(item,'weight',100)
-//    state.SelectFoods.push(item)
-//    weightプロパティの有無で追加を判断
-    if (payload.weight === undefined){
-      Vue.set(payload,'weight',100)
-      state.SelectFoods.push(payload);
+    //重複して登録させると重量入力時同じものも変化するので、名前で判定する
+    var isFoodExit = false
+    var index = 0
+    for(index in state.SelectFoods){
+      if(state.SelectFoods[index].name == payload.name){
+        isFoodExit = true;
+        break;
+      }
     }
+      if(isFoodExit){
+        //重複時はいまのところ何もしない
+      }else{
+        //重複しない時は重量のプロパティを付与してpushする
+        Vue.set(payload,'weight',100)
+        state.SelectFoods.push(payload);
+      }
     },
     deleteSelectFood(state,index) {
-      //Weightプロパティ消さないと再度追加不能になるので、プロパティを消す処理を挟む
-      Vue.delete(state.SelectFoods[index],'weight')
       state.SelectFoods.splice(index,1)
     },
     //セルフ食品登録用
@@ -77,7 +80,7 @@ export default new Vuex.Store({
     },
     //ストレージから読み込み用
     //カロリー
-    setCalfromStroage(state,payload){ 
+    setCalfromStroage(state,payload){
       state.TargetCalorie = payload.TargetCalorie
       if (payload.TargetCalorie == undefined){
         return state.TargetCalorie = 1200;
