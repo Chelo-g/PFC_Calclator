@@ -93,10 +93,11 @@ export default {
         }
     },
     created() {
-        //console.log("create")
+        //初めにローカルストレージより読み込む
         this.$store.dispatch('setSelectFoodfromStroage',pfcCalcFoodStorage.fetch())
     },
     watch:{
+        //selectFoodListを監視し変更時にローカルストレージに保存
         watchSelectFoods:{
             handler: function(watchSelectFoods){
                 pfcCalcFoodStorage.save(watchSelectFoods);

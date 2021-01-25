@@ -12,7 +12,8 @@ export default {
     },
     data() {
       return {
-        datacollection: null,
+        datacollection: { labels:[], datasets: [] },
+        options: null
       }
     },
     mounted() {

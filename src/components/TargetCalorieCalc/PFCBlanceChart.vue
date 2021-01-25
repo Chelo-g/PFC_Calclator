@@ -12,7 +12,7 @@ export default {
     },
     data() {
       return {
-        datacollection: null,
+        datacollection: { labels:[], datasets: [] },
       }
     }
     ,
