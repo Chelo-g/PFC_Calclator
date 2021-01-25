@@ -5,31 +5,6 @@
 
 ----
 
-## Vue.js
-### コンポーネントの関係
-```
-App.vue ─ viwes/About.vue
-        └ views/FoodsCalcate.vue
-            ├ components/FoodsCalc/FoodsCalc.vue
-            ├ components/FoodsCalc/PFCChartCal.vue
-            ├ components/FoodsCalc/PFCChartWeight.vue
-            ├ components/FoodsCalc/NutrientsChart.vue
-            ├ components/FoodsCalc/VitaminsChart.vue
-            ├ components/FoodShearch/FoodShearch.vue
-            ├ components/FoodShearch/FoodShearch.vue
-            └ components/TargetCalorieCalc/TargetCalorieCalc.vue
-                └ components/TargetCalorieCalc/PFCBlanceChart.vue
-```
-｢PFCBlanceChart.vue｣だけ分けたのは最初に作って修正がめんどくさくなったから。  
-親-子を超えたmethodsの呼び出しがめんどくさい事を理解していればこうはしなかった。  
-次回作では修正が容易に出来る形で作成するよう心がける。
-### 対応予定
-* CSSの書式が酷すぎるので修正
-
-----
-
-
-
 ### 更新記録
 <dl>
 <dt>210125
@@ -44,3 +19,26 @@ App.vue ─ viwes/About.vue
 <dt>210122<dt>
 <dd>公開<dd>
 </dl>
+
+### 対応予定
+* CSSの書式が酷すぎるので修正
+
+----
+### このアプリケーションについて
+Vue CLI + Vuex + Vue Routerを使用して作成しています。
+
+### コンポーネントの関係
+```
+App.vue ─ viwes/About.vue
+        └ views/FoodsCalcate.vue
+            ├ components/FoodsCalc/FoodsCalc.vue
+            ├ components/FoodsCalc/PFCChartCal.vue
+            ├ components/FoodsCalc/PFCChartWeight.vue
+            ├ components/FoodsCalc/NutrientsChart.vue
+            ├ components/FoodsCalc/VitaminsChart.vue
+            ├ components/FoodShearch/FoodShearch.vue
+            ├ components/FoodShearch/FoodShearch.vue
+            └ components/TargetCalorieCalc/TargetCalorieCalc.vue
+                                            └ PFCBlanceChart.vue
+```
+
