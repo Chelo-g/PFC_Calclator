@@ -7,6 +7,8 @@
 
 ### 更新記録
 <dl>
+<dt>210128
+<dd>Element-UI版を追加
 <dt>210125
 <dd>食品リスト初期化ボタンの実装
 <dd>エラー時アラートが出るように修正
@@ -20,25 +22,8 @@
 <dd>公開<dd>
 </dl>
 
-### 対応予定
-* CSSの書式が酷すぎるので修正
 
 ----
 ### このアプリケーションについて
-Vue CLI + Vuex + Vue Routerを使用して作成しています。
-
-### コンポーネントの関係
-```
-App.vue ─ viwes/About.vue
-        └ views/FoodsCalcate.vue
-            ├ components/FoodsCalc/FoodsCalc.vue
-            ├ components/FoodsCalc/PFCChartCal.vue
-            ├ components/FoodsCalc/PFCChartWeight.vue
-            ├ components/FoodsCalc/NutrientsChart.vue
-            ├ components/FoodsCalc/VitaminsChart.vue
-            ├ components/FoodShearch/FoodShearch.vue
-            ├ components/FoodShearch/FoodShearch.vue
-            └ components/TargetCalorieCalc/TargetCalorieCalc.vue
-                                            └ PFCBlanceChart.vue
-```
+Vue CLI + Vuex + Vue Router + Element-UIを使用して作成しています。
 

@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -10,29 +10,29 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
     path: '/',
     name: 'Calucrate',
-    component: () => import( '../views/FoodsCalcate.vue')
+    component: () => import('../views/FoodsCalcate.vue'),
   },
   {
     path: '/Element',
     name: 'Element',
-    component: () => import( '../views/FoodsCalcateElement.vue')
+    component: () => import('../views/FoodsCalcateElement.vue'),
   },
-//  {
-//    path: '/search',
-//    name: 'FoodSearch',
-//    component: () => import( '../components/FoodShearch/FoodShearch.vue')
-//  },
-]
+  //  {
+  //    path: '/search',
+  //    name: 'FoodSearch',
+  //    component: () => import( '../components/FoodShearch/FoodShearch.vue')
+  //  },
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
