@@ -53,7 +53,12 @@
           </el-table-column>
           <el-table-column fixed="right" label="Del" width="80">
             <template slot-scope="scope">
-              <el-button class="" @click="saveFoods(limited[scope.$index])" size="mini" plain>
+              <el-button
+                class=""
+                @click="dellFood(sortList[scope.$index]['name'])"
+                size="mini"
+                plain
+              >
                 Del
               </el-button>
             </template>
@@ -186,7 +191,7 @@ export default {
     //indexの取得
     //https://yoshikiito.net/blog/archives/1028/
     dellFood(name) {
-      //console.log(index)
+      // console.log(name);
       this.$store.dispatch('doFoodDel', name);
       this.$emit('chartUpdata');
     },

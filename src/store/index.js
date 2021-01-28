@@ -111,9 +111,10 @@ export default new Vuex.Store({
         if (
           state.SelectFoods[index].name == name &&
           state.SelectFoods[index].lists.list == state.FoodListNumber
-        )
+        ) {
           state.SelectFoods.splice(index, 1);
-        break;
+          break;
+        }
       }
       // state.SelectFoods.splice(index,1)
     },
