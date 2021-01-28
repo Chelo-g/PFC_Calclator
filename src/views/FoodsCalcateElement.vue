@@ -18,20 +18,28 @@
           <VitaminsChart ref="ChartVitamins" />
       </div>
       <div class="footerContainer">
-        <button @click="doInitialization()">食品リストクリア</button><br>
-        食品データソース：<a href="https://www.mext.go.jp/a_menu/syokuhinseibun/1365297.htm">日本食品標準成分表2015年版（七訂）</a>         © 2021 チェロ<br>
+          <el-button 
+          @click="doInitialization()"
+          size="mini"
+          plain
+          >
+          食品リストクリア
+        </el-button>
+        食品データソース：<a href="https://www.mext.go.jp/a_menu/syokuhinseibun/1365297.htm">日本食品標準成分表2015年版（七訂）</a>
+        © 2021 チェロ
+
       </div>
   </div>
 </template>
 
 <script>
-import TargetCalc from '@/components/TargetCalorieCalc/TargetCalorieCalc.vue'
-import FoodCalc from '@/components/FoodsCalc/FoodsCalc'
-import FoodSearch from '@/components/FoodShearch/FoodShearch'
-import PFCChartCal from '@/components/FoodsCalc/PFCChartCal.vue'
-import PFCChartWeight from '@/components/FoodsCalc/PFCChartWeight.vue'
-import NutrientsChart from '@/components/FoodsCalc/NutrientsChart.vue'
-import VitaminsChart from '@/components/FoodsCalc/VitaminsChart.vue'
+import TargetCalc from '@/components/Element/TargetCalorieCalc'
+import FoodCalc from '@/components/Element/FoodsCalc'
+import FoodSearch from '@/components/Element/FoodShearch'
+import PFCChartCal from '@/components/Element/PFCChartCal.vue'
+import PFCChartWeight from '@/components/Element/PFCChartWeight.vue'
+import NutrientsChart from '@/components/Element/NutrientsChart.vue'
+import VitaminsChart from '@/components/Element/VitaminsChart.vue'
 
 // 食品リスト故障時の挙動確認用
 // var STORAGE_KEY_FOOD = 'pfc-calc-foodlist'
@@ -123,11 +131,11 @@ https://ics.media/entry/15649/
   grid-row-end: 2;
 }
 .footerContainer{
+  margin-top: 5px;
   grid-column-start: 1;
   grid-column-end: 7;
   grid-row-start: 2;
   grid-row-end: 3;
-  margin-top: 5px;
 }
 a {
   font-weight: bold;

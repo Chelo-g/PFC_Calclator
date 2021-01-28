@@ -20,6 +20,7 @@
 
     <div>
       <ul class="list date">
+        <li>210128 <a href="https://element.eleme.io/">Element-UI</a> Version 追加</li>
         <li>210125 ローカルストレージ絡みのエラー対策を兼ね、食品リストリセットボタン設置</li>
         <li>210124 レシピの保存数増加</li>
         <li>210123 データの記録、食品追加機能等実装</li>

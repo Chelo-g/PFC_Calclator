@@ -2,6 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">PFC Calculater</router-link> |
+      <router-link to="/Element">Element-UI Ver</router-link> |
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>

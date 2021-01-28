@@ -17,6 +17,11 @@ const routes = [
     name: 'Calucrate',
     component: () => import( '../views/FoodsCalcate.vue')
   },
+  {
+    path: '/Element',
+    name: 'Element',
+    component: () => import( '../views/FoodsCalcateElement.vue')
+  },
 //  {
 //    path: '/search',
 //    name: 'FoodSearch',

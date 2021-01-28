@@ -28,7 +28,7 @@
                     <th :class="judgeRedText(this.$store.getters.ProteinCalorie - this.$store.getters.getsumParam('Protein')*4)">{{(this.$store.getters.ProteinCalorie - this.$store.getters.getsumParam("Protein")*4).toFixed(1)}}</th>
                     <th :class="judgeRedText(this.$store.getters.FatCalorie - this.$store.getters.getsumParam('Fat')*9)">{{(this.$store.getters.FatCalorie - this.$store.getters.getsumParam("Fat")*9).toFixed(1)}}</th>
                     <th :class="judgeRedText(this.$store.getters.CarbonateCalorie - this.$store.getters.getsumParam('Carbo')*4)">{{(this.$store.getters.CarbonateCalorie - this.$store.getters.getsumParam("Carbo")*4).toFixed(1)}}</th>
-                    <th :class="judgeRedText(this.$store.getters.TargetCalorie -totalCal)">{{(this.$store.getters.TargetCalorie - totalCal)}}</th>
+                    <th :class="judgeRedText(this.$store.getters.TargetCalorie -totalCal)">{{(this.$store.getters.TargetCalorie - totalCal).toFixed(1)}}</th>
                 </tr>
             </table>
         </div>
